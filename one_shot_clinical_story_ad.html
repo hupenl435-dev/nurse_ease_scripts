@@ -1,0 +1,195 @@
+
+<h2 class="sr-only">智慧護理紀錄助手 — 一鏡到底臨床情境廣告文案，以同一位病人呈現傳統與智慧兩種班別結局</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.page{max-width:860px;margin:0 auto;padding:0 0 3rem;font-family:var(--font-sans);color:var(--color-text-primary)}
+.act-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:6px}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:2.5rem 0}
+.hero{padding:2.5rem 1rem 2rem;text-align:center}
+.hero-kicker{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#0F6E56;margin-bottom:1rem;font-weight:500}
+.hero-h1{font-size:28px;font-weight:500;line-height:1.3;margin-bottom:1rem}
+.hero-sub{font-size:14px;color:var(--color-text-secondary);line-height:1.8;max-width:520px;margin:0 auto}
+.patient-card{margin:0 1rem 2rem;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;display:flex;align-items:center;gap:14px}
+.avatar{width:44px;height:44px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:15px;color:#085041;flex-shrink:0}
+.patient-info{flex:1}
+.patient-name{font-size:15px;font-weight:500;margin-bottom:2px}
+.patient-meta{font-size:12px;color:var(--color-text-secondary);line-height:1.6}
+.scenario-header{margin:0 1rem 1.25rem;display:grid;grid-template-columns:100px 1fr 1fr;gap:0;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.sh-time{padding:0.75rem 1rem;background:var(--color-background-secondary);font-size:11px;font-weight:500;color:var(--color-text-secondary);border-right:0.5px solid var(--color-border-tertiary)}
+.sh-old{padding:0.75rem 1rem;background:#FCEBEB;font-size:12px;font-weight:500;color:#791F1F;border-right:0.5px solid var(--color-border-tertiary);display:flex;align-items:center;gap:6px}
+.sh-new{padding:0.75rem 1rem;background:#E1F5EE;font-size:12px;font-weight:500;color:#085041;display:flex;align-items:center;gap:6px}
+.scene-wrap{margin:0 1rem 0.75rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.scene-row{display:grid;grid-template-columns:100px 1fr 1fr}
+.scene-time-cell{padding:1.1rem 1rem;background:var(--color-background-secondary);border-right:0.5px solid var(--color-border-tertiary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.scene-time-cell:last-of-type{border-bottom:none}
+.time-stamp{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:3px}
+.time-act{font-size:11px;color:var(--color-text-tertiary);line-height:1.4}
+.scene-old-cell{padding:1.1rem 1rem;border-right:0.5px solid var(--color-border-tertiary);border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px;color:var(--color-text-secondary);line-height:1.7;background:#FCEBEB08}
+.scene-new-cell{padding:1.1rem 1rem;border-bottom:0.5px solid var(--color-border-tertiary);font-size:12px;color:var(--color-text-secondary);line-height:1.7;background:#E1F5EE08}
+.scene-row:last-child .scene-time-cell,
+.scene-row:last-child .scene-old-cell,
+.scene-row:last-child .scene-new-cell{border-bottom:none}
+.pain{color:#A32D2D;font-weight:500}
+.win{color:#0F6E56;font-weight:500}
+.feature-chip{display:inline-flex;align-items:center;gap:4px;background:#E1F5EE;color:#085041;font-size:11px;padding:2px 8px;border-radius:100px;margin-top:6px;white-space:nowrap}
+.feature-chip i{font-size:13px}
+.pain-chip{background:#FCEBEB;color:#791F1F}
+.act-break{margin:0 1rem;padding:1.25rem 0 0.5rem;border-top:0.5px solid var(--color-border-tertiary)}
+.act-num{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:4px}
+.act-title{font-size:16px;font-weight:500;color:var(--color-text-primary)}
+.epilogue{margin:1.5rem 1rem 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.epi-card{border-radius:var(--border-radius-lg);padding:1.25rem;border:0.5px solid var(--color-border-tertiary)}
+.epi-old{background:#FCEBEB18}
+.epi-new{background:#E1F5EE18}
+.epi-label{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px}
+.epi-label-old{color:#A32D2D}
+.epi-label-new{color:#0F6E56}
+.epi-line{font-size:13px;color:var(--color-text-secondary);line-height:1.8;margin-bottom:4px;display:flex;align-items:flex-start;gap:6px}
+.epi-line i{font-size:15px;flex-shrink:0;margin-top:2px}
+.epi-close{margin:1.5rem 1rem 0;text-align:center;padding:1.75rem;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg)}
+.epi-close-title{font-size:18px;font-weight:500;margin-bottom:0.6rem}
+.epi-close-sub{font-size:13px;color:var(--color-text-secondary);line-height:1.8}
+</style>
+
+<div class="page">
+
+<div class="hero">
+  <p class="hero-kicker">真實臨床情境 · 一鏡到底</p>
+  <h1 class="hero-h1">同一位病人，同一個早班<br>兩個護理師，兩種結局</h1>
+  <p class="hero-sub">這不是最糟的一天，也不是最好的一天。這只是一個普通的早班——但工具的不同，決定了病人的安全，和護理師能否準時下班。</p>
+</div>
+
+<div class="patient-card">
+  <div class="avatar">陳</div>
+  <div class="patient-info">
+    <p class="patient-name">陳美惠，72 歲，女性</p>
+    <p class="patient-meta">診斷：糖尿病足部潰瘍合併蜂窩性組織炎，術後第 3 天。需每日換藥、血糖監測、靜脈抗生素給藥，並追蹤傷口癒合進展。護理計畫：感染風險、皮膚完整性受損。</p>
+  </div>
+</div>
+
+<div class="scenario-header">
+  <div class="sh-time" style="display:flex;align-items:center">時間 / 情境</div>
+  <div class="sh-old"><i class="ti ti-x" style="font-size:15px" aria-hidden="true"></i>傳統做法（小林護理師）</div>
+  <div class="sh-new"><i class="ti ti-check" style="font-size:15px" aria-hidden="true"></i>智慧護理助手（小陳護理師）</div>
+</div>
+
+<div class="act-break">
+  <p class="act-num">第一幕</p>
+  <p class="act-title">07:58 · 接班，了解病人狀況</p>
+</div>
+
+<div class="scene-wrap">
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">07:58</p><p class="time-act">接班查閱歷史紀錄</p></div>
+    <div class="scene-old-cell">翻開紙本交班本，手寫字跡潦草，昨晚的換藥紀錄和血糖值分散在不同頁，<span class="pain">花了快 10 分鐘才拼湊出陳奶奶的狀況</span>，還不確定傷口上次是什麼顏色。</div>
+    <div class="scene-new-cell">開啟 App，進入陳奶奶的歷史護理紀錄頁，<span class="win">Timeline 左側清楚標示日期時間</span>，右側依序呈現每筆護理紀錄內容。切換到 E 評值，護理計畫追蹤一目了然，兩分鐘掌握完整病況。<span class="feature-chip"><i class="ti ti-timeline" aria-hidden="true"></i>Timeline 歷史紀錄</span><span class="feature-chip"><i class="ti ti-search" aria-hidden="true"></i>搜尋欄快速定位</span></div>
+  </div>
+</div>
+
+<div class="act-break">
+  <p class="act-num">第二幕</p>
+  <p class="act-title">08:20 · 床邊換藥，傷口評估</p>
+</div>
+
+<div class="scene-wrap">
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">08:20</p><p class="time-act">換藥 + 傷口評估</p></div>
+    <div class="scene-old-cell">換藥時發現傷口邊緣有輕微紅腫，<span class="pain">雙手都是手套沒辦法記錄</span>，只能在腦中默背：「左足背，3×2，紅腫，少量黃色滲液，乾式換藥。」心裡擔心等等會忘。</div>
+    <div class="scene-new-cell">換藥前先開啟錄音，一邊操作一邊說：「陳美惠，左足背傷口，大小約三乘二公分，傷口邊緣紅腫，滲液少量呈黃色，執行乾式換藥，更換 Mepilex Border……」<span class="win">系統即時轉為護理紀錄初稿</span>，雙手不需離開換藥流程。<span class="feature-chip"><i class="ti ti-microphone" aria-hidden="true"></i>語音建立初稿</span><span class="feature-chip"><i class="ti ti-template" aria-hidden="true"></i>護理模板參考</span></div>
+  </div>
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">08:31</p><p class="time-act">傷口拍照存證</p></div>
+    <div class="scene-old-cell">換完藥想拍傷口照片，但手機在護理站充電，<span class="pain">要脫手套、出去拿手機再回來</span>，病人傷口已包好，錯失最佳拍照時機，最後放棄，紀錄只有文字。</div>
+    <div class="scene-new-cell">換藥完成前，直接在 App 開啟相機，貼近傷口拍攝，<span class="win">圖片即時附入紀錄，床邊上傳成功</span>，不需跑回護理站，陳奶奶都還沒問什麼就做好了。<span class="feature-chip"><i class="ti ti-camera" aria-hidden="true"></i>床邊拍照上傳</span></div>
+  </div>
+</div>
+
+<div class="act-break">
+  <p class="act-num">第三幕</p>
+  <p class="act-title">09:00 · 靜脈抗生素給藥時間</p>
+</div>
+
+<div class="scene-wrap">
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">09:02</p><p class="time-act">抗生素給藥提醒</p></div>
+    <div class="scene-old-cell">9 點抗生素給藥時間，但小林正在幫另一位病人抽血，<span class="pain">沒有任何系統提醒她，等她回到護理站看 MAR 已經 9:18</span>，給藥延誤近 20 分鐘，趕快去處理又忘了記錄時間。</div>
+    <div class="scene-new-cell">9:00 整，手機跳出給藥提醒通知，小陳點選後看到未給藥清單：「Ceftriaxone 1g IVD，09:00」。<span class="win">即使正在照護其他病人，也不會錯過</span>，準時完成給藥並記錄。<span class="feature-chip"><i class="ti ti-bell" aria-hidden="true"></i>給藥主動提醒</span></div>
+  </div>
+</div>
+
+<div class="act-break">
+  <p class="act-num">第四幕</p>
+  <p class="act-title">10:45 · 血糖監測 + 護理計畫評值</p>
+</div>
+
+<div class="scene-wrap">
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">10:45</p><p class="time-act">血糖監測紀錄</p></div>
+    <div class="scene-old-cell">測完血糖 187 mg/dL，先寫在便利貼上黏在口袋，等等再補打。結果下一個病人有狀況，<span class="pain">便利貼遺失，下午才想起，數值只能憑印象打「約 180-190」</span>。</div>
+    <div class="scene-new-cell">測完血糖，立刻開啟錄音說：「10:45 血糖 187，無低血糖症狀，繼續觀察飯前飯後血糖趨勢。」<span class="win">即時建立紀錄，數值精準不失真</span>，告別便利貼人生。<span class="feature-chip"><i class="ti ti-microphone" aria-hidden="true"></i>即時語音紀錄</span><span class="feature-chip"><i class="ti ti-tags" aria-hidden="true"></i>專有名詞快捷</span></div>
+  </div>
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">11:10</p><p class="time-act">護理計畫評值</p></div>
+    <div class="scene-old-cell">需要寫護理計畫評值，翻到 HIS 的護理計畫頁面，再切回護理紀錄視窗，<span class="pain">系統之間來回切換，寫完兩個評值花了將近 15 分鐘</span>，格式也沒把握對。</div>
+    <div class="scene-new-cell">切換 App 底部「護理計畫」頁籤，現有兩筆計畫一覽：感染風險、皮膚完整性受損。點選後說出評值，<span class="win">S.O.E 自動歸位，5 分鐘完成兩筆評值</span>。<span class="feature-chip"><i class="ti ti-notes" aria-hidden="true"></i>護理計畫快速評值</span></div>
+  </div>
+</div>
+
+<div class="act-break">
+  <p class="act-num">第五幕</p>
+  <p class="act-title">12:30 · 午後，初稿潤稿與儲存</p>
+</div>
+
+<div class="scene-wrap">
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">12:30</p><p class="time-act">補打 / 優化紀錄</p></div>
+    <div class="scene-old-cell">趁午休補打上午所有紀錄。腦中的細節已模糊，<span class="pain">傷口顏色是淡黃還是深黃？滲液多還是少量？血糖是 187 還是 178？</span>只能寫大概，紀錄品質差，萬一被查閱還得解釋。</div>
+    <div class="scene-new-cell">上午的紀錄都在 App 裡等著。點選「AI 優化」，<span class="win">系統自動將口語初稿潤成專業護理文字</span>，若不滿意還可點「返回上一版本」。午休是真正的休息，不是補班。<span class="feature-chip"><i class="ti ti-sparkles" aria-hidden="true"></i>AI 優化</span><span class="feature-chip"><i class="ti ti-arrow-back" aria-hidden="true"></i>版本回復</span></div>
+  </div>
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">13:15</p><p class="time-act">確認並上傳 HIS</p></div>
+    <div class="scene-old-cell">逐筆登入 HIS 手動輸入紀錄，<span class="pain">重複貼上、調整格式、確認儲存，光這道工序就花了 40 分鐘</span>，預計下班時間已悄悄過去。</div>
+    <div class="scene-new-cell">確認紀錄內容後，點擊「儲存至 HIS」，<span class="win">一鍵上傳，系統確認同步完成</span>。13:18，小陳已完成全部紀錄，準備好交班資料。<span class="feature-chip"><i class="ti ti-device-floppy" aria-hidden="true"></i>一鍵儲存至 HIS</span></div>
+  </div>
+</div>
+
+<div class="act-break">
+  <p class="act-num">第六幕</p>
+  <p class="act-title">14:00 · 交班</p>
+</div>
+
+<div class="scene-wrap">
+  <div class="scene-row">
+    <div class="scene-time-cell"><p class="time-stamp">14:00</p><p class="time-act">交班給下一班</p></div>
+    <div class="scene-old-cell">交班時下一班護理師問：「陳奶奶今天傷口怎麼樣？有拍照嗎？」小林支支吾吾，<span class="pain">只有文字描述，照片沒拍到，還說血糖「大概 180 左右」</span>。交班品質不足，下一班護理師要重新評估。</div>
+    <div class="scene-new-cell">下一班護理師問同樣的問題，小陳打開 App，<span class="win">Timeline 清楚呈現當日所有紀錄：換藥描述、傷口照片、血糖精確值 187、抗生素給藥時間、護理計畫評值</span>。交班完整，對方直接確認沒有疑問。<span class="feature-chip"><i class="ti ti-timeline" aria-hidden="true"></i>Timeline 交班</span><span class="feature-chip"><i class="ti ti-photo" aria-hidden="true"></i>圖文並茂</span></div>
+  </div>
+</div>
+
+<div class="epilogue">
+  <div class="epi-card epi-old">
+    <p class="epi-label epi-label-old">小林護理師的這一天</p>
+    <div class="epi-line"><i class="ti ti-x" style="color:#E24B4A" aria-hidden="true"></i>給藥延誤 18 分鐘</div>
+    <div class="epi-line"><i class="ti ti-x" style="color:#E24B4A" aria-hidden="true"></i>傷口照片未能記錄</div>
+    <div class="epi-line"><i class="ti ti-x" style="color:#E24B4A" aria-hidden="true"></i>血糖數值憑印象填寫</div>
+    <div class="epi-line"><i class="ti ti-x" style="color:#E24B4A" aria-hidden="true"></i>紀錄補打花費 40 分鐘</div>
+    <div class="epi-line"><i class="ti ti-x" style="color:#E24B4A" aria-hidden="true"></i>交班不完整，下班延遲</div>
+    <div class="epi-line"><i class="ti ti-x" style="color:#E24B4A" aria-hidden="true"></i>午休在補紀錄，沒有休息</div>
+  </div>
+  <div class="epi-card epi-new">
+    <p class="epi-label epi-label-new">小陳護理師的這一天</p>
+    <div class="epi-line"><i class="ti ti-check" style="color:#1D9E75" aria-hidden="true"></i>給藥準時，提醒不漏接</div>
+    <div class="epi-line"><i class="ti ti-check" style="color:#1D9E75" aria-hidden="true"></i>傷口床邊拍照即上傳</div>
+    <div class="epi-line"><i class="ti ti-check" style="color:#1D9E75" aria-hidden="true"></i>血糖數值精確，即時建立</div>
+    <div class="epi-line"><i class="ti ti-check" style="color:#1D9E75" aria-hidden="true"></i>一鍵儲存，3 分鐘同步 HIS</div>
+    <div class="epi-line"><i class="ti ti-check" style="color:#1D9E75" aria-hidden="true"></i>交班圖文完整，準時下班</div>
+    <div class="epi-line"><i class="ti ti-check" style="color:#1D9E75" aria-hidden="true"></i>午休真正在休息</div>
+  </div>
+</div>
+
+<div class="epi-close">
+  <p class="epi-close-title">陳奶奶是每一位護理師每天都會遇到的病人</p>
+  <p class="epi-close-sub">不同的不是護理師的能力，而是手上的工具。<br>智慧護理紀錄助手，讓每一個照護細節都被看見、被記住、被傳承。<br>讓護理師把時間還給病人，把下班還給自己。</p>
+</div>
+
+</div>
