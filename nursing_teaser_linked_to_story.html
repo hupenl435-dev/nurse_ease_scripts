@@ -1,0 +1,282 @@
+
+<h2 class="sr-only">智慧護理紀錄助手功能預告，延續陳美惠臨床情境，介紹 VLM 影像理解與智慧交班摘要</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.page{max-width:860px;margin:0 auto;padding:0 0 3rem;font-family:var(--font-sans);color:var(--color-text-primary)}
+
+.bridge{padding:2rem 1rem 1.75rem;text-align:center;border-bottom:0.5px solid var(--color-border-tertiary)}
+.bridge-eyebrow{font-size:11px;letter-spacing:0.13em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:0.6rem}
+.bridge-h1{font-size:24px;font-weight:500;line-height:1.35;margin-bottom:0.75rem}
+.bridge-h1 span{color:#534AB7}
+.bridge-sub{font-size:13px;color:var(--color-text-secondary);line-height:1.8;max-width:500px;margin:0 auto 1.1rem}
+.coming-badge{display:inline-flex;align-items:center;gap:6px;background:#EEEDFE;color:#3C3489;font-size:12px;font-weight:500;padding:4px 16px;border-radius:100px}
+
+.recall-strip{margin:1.5rem 1rem 0;background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:12px}
+.recall-icon{font-size:18px;color:#888780;flex-shrink:0;margin-top:1px}
+.recall-label{font-size:11px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px}
+.recall-text{font-size:13px;color:var(--color-text-secondary);line-height:1.7}
+.recall-text strong{color:var(--color-text-primary);font-weight:500}
+
+.feature-block{padding:2rem 1rem 0}
+.fb-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;padding:3px 12px;border-radius:100px;margin-bottom:0.9rem}
+.badge-vlm{background:#EEEDFE;color:#3C3489}
+.badge-handoff{background:#E1F5EE;color:#085041}
+.fb-h2{font-size:17px;font-weight:500;margin-bottom:0.35rem}
+.fb-sub{font-size:13px;color:var(--color-text-secondary);line-height:1.7;margin-bottom:1.25rem}
+.fb-question{font-size:14px;font-weight:500;color:#534AB7;margin-bottom:1.25rem;padding-left:1rem;border-left:2px solid #AFA9EC;border-radius:0}
+
+.mockup-bg{background:var(--color-background-secondary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1.25rem}
+.phone{background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:14px;overflow:hidden;max-width:320px;margin:0 auto}
+.topbar{background:var(--color-background-secondary);padding:9px 13px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--color-border-tertiary)}
+.topbar-title{font-size:12px;font-weight:500}
+.topbar-sub{font-size:11px;color:var(--color-text-tertiary)}
+
+.photo-area{height:130px;background:#F1EFE8;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.scan-box{position:absolute;inset:10px;border:1.5px solid #7F77DD;border-radius:4px;opacity:0.45}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:#7F77DD;opacity:0.55;animation:scanAnim 2.2s ease-in-out infinite}
+@keyframes scanAnim{0%{top:10px}50%{top:118px}100%{top:10px}}
+.photo-inner{text-align:center;z-index:1}
+.photo-inner i{font-size:24px;color:#AFA9EC;display:block;margin-bottom:5px}
+.photo-caption{font-size:10px;color:#888780;line-height:1.5}
+
+.vlm-result{padding:11px 13px;border-top:0.5px solid var(--color-border-tertiary)}
+.vlm-label{font-size:11px;color:#534AB7;font-weight:500;margin-bottom:7px;display:flex;align-items:center;gap:4px}
+.typed{font-size:11px;color:var(--color-text-secondary);line-height:1.75;font-family:var(--font-mono)}
+.cursor{display:inline-block;width:1px;height:11px;background:#7F77DD;vertical-align:middle;animation:blink 1s step-end infinite}
+@keyframes blink{50%{opacity:0}}
+.vlm-tags{display:flex;flex-wrap:wrap;gap:5px;padding:9px 13px;border-top:0.5px solid var(--color-border-tertiary)}
+.vtag{font-size:11px;background:#EEEDFE;color:#3C3489;padding:2px 9px;border-radius:100px}
+
+.if-had-vlm{margin:1rem 0 0;padding:1rem 1.25rem;background:#EEEDFE18;border:0.5px solid #AFA9EC;border-radius:var(--border-radius-md)}
+.ifh-label{font-size:11px;font-weight:500;color:#534AB7;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+.ifh-body{font-size:12px;color:var(--color-text-secondary);line-height:1.7}
+
+.separator{margin:2rem 1rem 0;border:none;border-top:0.5px solid var(--color-border-tertiary)}
+
+.handoff-phone{background:var(--color-background-primary);border:0.5px solid var(--color-border-secondary);border-radius:14px;overflow:hidden;max-width:320px;margin:0 auto}
+.ai-gen-btn{display:inline-flex;align-items:center;gap:4px;background:#E1F5EE;color:#085041;font-size:11px;font-weight:500;padding:4px 9px;border-radius:100px;border:0.5px solid #9FE1CB}
+.hbody{padding:11px 13px}
+.p-row{display:flex;align-items:center;gap:9px;margin-bottom:11px;padding-bottom:11px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.avatar{width:30px;height:30px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:500;color:#085041;flex-shrink:0}
+.pname{font-size:12px;font-weight:500}
+.pmeta{font-size:10px;color:var(--color-text-tertiary)}
+.scard{margin-bottom:8px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);overflow:hidden}
+.scard-h{padding:5px 9px;font-size:11px;font-weight:500;display:flex;align-items:center;gap:5px}
+.sh-lab{background:#E6F1FB;color:#0C447C}
+.sh-med{background:#FAEEDA;color:#633806}
+.sh-todo{background:#FCEBEB;color:#791F1F}
+.sh-note{background:#EEEDFE;color:#3C3489}
+.scard-b{padding:7px 9px;font-size:11px;color:var(--color-text-secondary);line-height:1.7;background:var(--color-background-primary)}
+.hi{font-weight:500;color:var(--color-text-primary)}
+.al{font-weight:500;color:#A32D2D}
+.todo-row{display:flex;align-items:flex-start;gap:5px;margin-bottom:3px}
+.dot-red{width:5px;height:5px;border-radius:50%;background:#E24B4A;flex-shrink:0;margin-top:4px}
+.dot-green{width:5px;height:5px;border-radius:50%;background:#1D9E75;flex-shrink:0;margin-top:4px}
+.done{color:var(--color-text-tertiary);text-decoration:line-through}
+
+.if-had-ho{margin:1rem 0 0;padding:1rem 1.25rem;background:#E1F5EE18;border:0.5px solid #9FE1CB;border-radius:var(--border-radius-md)}
+.ifh-label-g{font-size:11px;font-weight:500;color:#0F6E56;margin-bottom:6px;display:flex;align-items:center;gap:5px}
+
+.script-section{padding:2rem 1rem 0}
+.script-head{font-size:15px;font-weight:500;margin-bottom:1rem;display:flex;align-items:center;gap:7px}
+.stbl{width:100%;border-collapse:collapse;font-size:12px;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden;table-layout:fixed}
+.stbl th{background:var(--color-background-secondary);padding:7px 9px;text-align:left;font-weight:500;font-size:11px;color:var(--color-text-secondary);border-bottom:0.5px solid var(--color-border-tertiary)}
+.stbl td{padding:9px 9px;vertical-align:top;line-height:1.65;border-bottom:0.5px solid var(--color-border-tertiary);color:var(--color-text-secondary);font-size:12px}
+.stbl tr:last-child td{border-bottom:none}
+.sid{font-weight:500;color:var(--color-text-primary);font-size:11px;white-space:nowrap}
+.tc{color:#534AB7;font-weight:500;font-size:12px}
+.vo{color:var(--color-text-primary);font-style:italic}
+.chip{display:inline-block;background:var(--color-background-secondary);color:var(--color-text-tertiary);font-size:10px;padding:1px 7px;border-radius:100px;border:0.5px solid var(--color-border-tertiary);margin-top:3px}
+.link-note{font-size:11px;color:#534AB7;font-style:italic}
+
+.finale{margin:2rem 1rem 0;text-align:center;padding:1.75rem;border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);background:var(--color-background-secondary)}
+.fin-eye{font-size:11px;letter-spacing:0.1em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:0.6rem}
+.fin-h{font-size:18px;font-weight:500;margin-bottom:0.4rem}
+.fin-s{font-size:13px;color:var(--color-text-secondary)}
+</style>
+
+<div class="page">
+
+<div class="bridge">
+  <p class="bridge-eyebrow">正片結束後 · 下一階段功能預告</p>
+  <h1 class="bridge-h1">陳奶奶的故事，<span>還沒結束</span></h1>
+  <p class="bridge-sub">智慧護理紀錄助手讓小陳準時下班。但我們想給她的，遠不只這些——下一步，是讓 App 真正「看懂」陳奶奶的傷口，並在換班時替她說清楚每一件事。</p>
+  <span class="coming-badge"><i class="ti ti-rocket" style="font-size:14px" aria-hidden="true"></i>下一階段規劃中</span>
+</div>
+
+<div class="recall-strip">
+  <i class="ti ti-clock recall-icon" aria-hidden="true"></i>
+  <div>
+    <p class="recall-label">回到剛才的情境</p>
+    <p class="recall-text">08:31，小陳在床邊拍下陳奶奶的左足背傷口，照片已上傳紀錄。傷口大小、滲液顏色、邊緣紅腫——這些，她是<strong>用說的</strong>描述進去的。但如果 App 能直接<strong>看懂這張照片</strong>呢？</p>
+  </div>
+</div>
+
+<div class="feature-block">
+  <span class="fb-badge badge-vlm"><i class="ti ti-eye" style="font-size:13px" aria-hidden="true"></i>未來規劃 · N12</span>
+  <h2 class="fb-h2">VLM 影像理解</h2>
+  <p class="fb-sub">那張傷口照片上傳後，系統自動辨識傷口大小、滲液性質、皮膚邊緣狀況，生成文字描述並直接帶入護理紀錄——不需要小陳再多說一句話。</p>
+  <p class="fb-question">「如果有 VLM，08:31 那一刻會長這樣——」</p>
+  <div class="mockup-bg">
+    <div class="phone">
+      <div class="topbar">
+        <span class="topbar-title">傷口影像分析</span>
+        <span class="topbar-sub">陳美惠 · 左足背 · 術後 D3</span>
+      </div>
+      <div class="photo-area">
+        <div class="scan-box"></div>
+        <div class="scan-line"></div>
+        <div class="photo-inner">
+          <i class="ti ti-scan" aria-hidden="true"></i>
+          <span class="photo-caption">VLM 分析中<br>08:31 拍攝 · 左足背</span>
+        </div>
+      </div>
+      <div class="vlm-result">
+        <p class="vlm-label"><i class="ti ti-sparkles" style="font-size:13px" aria-hidden="true"></i>影像輔助辨識結果</p>
+        <p class="typed">部位：左足背<br>估計大小：約 3×2 cm<br>滲液：少量，顏色淡黃<br>傷口邊緣：輕微紅腫，無明顯壞死<br>建議：持續監測感染徵象<span class="cursor"></span></p>
+      </div>
+      <div class="vlm-tags">
+        <span class="vtag">自動帶入護理紀錄</span>
+        <span class="vtag">連續追蹤比對</span>
+        <span class="vtag">影像輔助辨識</span>
+      </div>
+    </div>
+    <div class="if-had-vlm">
+      <p class="ifh-label"><i class="ti ti-bulb" style="font-size:14px" aria-hidden="true"></i>如果有 VLM，這一刻的差異</p>
+      <p class="ifh-body">小陳拍完照片、包好傷口，App 已自動完成文字描述。她不需要再開錄音補說傷口細節，也不需要擔心「淡黃還是深黃」說得不夠精確——影像本身就是最客觀的紀錄。明天換藥時，系統還能和今日照片自動比對，追蹤癒合進展。</p>
+    </div>
+  </div>
+</div>
+
+<hr class="separator">
+
+<div class="recall-strip" style="margin-top:2rem">
+  <i class="ti ti-clock recall-icon" aria-hidden="true"></i>
+  <div>
+    <p class="recall-label">回到剛才的情境</p>
+    <p class="recall-text">14:00，下一班護理師問：「陳奶奶今天怎麼樣？」小陳打開 Timeline 一一說明——她準備得很完整，但這需要<strong>她自己整理、自己開口說</strong>。如果系統能替她說呢？</p>
+  </div>
+</div>
+
+<div class="feature-block">
+  <span class="fb-badge badge-handoff"><i class="ti ti-file-text" style="font-size:13px" aria-hidden="true"></i>未來規劃 · N13</span>
+  <h2 class="fb-h2">智慧交班摘要</h2>
+  <p class="fb-sub">班別結束前，一鍵產生 AI 交班摘要。系統從當班所有紀錄中自動整理：近況、異常檢驗值、藥物給藥狀態、管路、待辦、特殊注意——讓下一班護理師不必再問，直接掌握。</p>
+  <p class="fb-question">「如果有智慧交班摘要，14:00 那一刻會長這樣——」</p>
+  <div class="mockup-bg">
+    <div class="handoff-phone">
+      <div class="topbar">
+        <span class="topbar-title">智慧交班摘要</span>
+        <span class="ai-gen-btn"><i class="ti ti-sparkles" style="font-size:11px" aria-hidden="true"></i>AI 產生摘要</span>
+      </div>
+      <div class="hbody">
+        <div class="p-row">
+          <div class="avatar">陳</div>
+          <div>
+            <p class="pname">陳美惠，72F · 糖尿病足部潰瘍合併蜂窩性組織炎</p>
+            <p class="pmeta">術後第 3 天 · 早班 07:00–15:00 摘要</p>
+          </div>
+        </div>
+        <div class="scard">
+          <div class="scard-h sh-lab"><i class="ti ti-test-pipe" style="font-size:12px" aria-hidden="true"></i>重要檢查檢驗</div>
+          <div class="scard-b">血糖 <span class="hi">187 mg/dL</span>（10:45）· WBC <span class="al">↑ 12.3</span>，傷口培養<span class="al">待回報</span>，CRP 結果尚未返回。</div>
+        </div>
+        <div class="scard">
+          <div class="scard-h sh-med"><i class="ti ti-pill" style="font-size:12px" aria-hidden="true"></i>藥物與管路狀況</div>
+          <div class="scard-b">Ceftriaxone 1g IVD <span class="hi">09:00 準時給藥</span>。右前臂周邊靜脈留置針，無紅腫滲漏。下午 Insulin sliding scale 待下一班評估執行。</div>
+        </div>
+        <div class="scard">
+          <div class="scard-h sh-todo"><i class="ti ti-checkbox" style="font-size:12px" aria-hidden="true"></i>待辦 · 需交接事項</div>
+          <div class="scard-b">
+            <div class="todo-row"><div class="dot-red"></div><span>14:00 Ceftriaxone 第二劑尚未執行，請下一班接續</span></div>
+            <div class="todo-row"><div class="dot-red"></div><span>傷口培養結果回報後通知值班醫師</span></div>
+            <div class="todo-row"><div class="dot-green"></div><span class="done">傷口換藥 08:20 完成，已拍照上傳</span></div>
+          </div>
+        </div>
+        <div class="scard">
+          <div class="scard-h sh-note"><i class="ti ti-message-circle" style="font-size:12px" aria-hidden="true"></i>特殊交班重點</div>
+          <div class="scard-b">家屬下午探視時詢問術後疼痛控制，請主動說明止痛計畫。病人情緒穩定，配合度佳，傷口照片已附入今日紀錄可供查閱。</div>
+        </div>
+      </div>
+    </div>
+    <div class="if-had-ho">
+      <p class="ifh-label-g"><i class="ti ti-bulb" style="font-size:14px" aria-hidden="true"></i>如果有智慧交班摘要，這一刻的差異</p>
+      <p class="ifh-body" style="font-size:12px;color:var(--color-text-secondary);line-height:1.7">小陳不需要在換班前 10 分鐘焦急整理重點，系統從當天所有語音紀錄、照片、給藥紀錄、護理計畫評值中自動萃取關鍵資訊。下一班護理師接過手機，30 秒看完陳奶奶今天的全貌，零遺漏、零口誤，第一個動作就是去給 14:00 那劑抗生素。</p>
+    </div>
+  </div>
+</div>
+
+<div class="script-section">
+  <p class="script-head"><i class="ti ti-movie" style="font-size:17px;color:var(--color-text-tertiary)" aria-hidden="true"></i>拍攝腳本（供大眾傳播媒體組參考）· 預告片 30 秒</p>
+  <table class="stbl" aria-label="功能預告拍攝腳本，延續陳美惠臨床情境">
+    <thead>
+      <tr>
+        <th style="width:55px">鏡號</th>
+        <th style="width:48px">時間</th>
+        <th style="width:28%">畫面 Visual</th>
+        <th style="width:17%">字幕 Subtitle</th>
+        <th style="width:18%">語音 / VO</th>
+        <th>動畫 / 備註</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="sid">N11-4</span></td>
+        <td class="tc">0–3s</td>
+        <td>正片末尾，小陳準時下班的背影淡出。黑底出現大字，接預告片。</td>
+        <td>「但陳奶奶的故事，還沒結束。」</td>
+        <td class="vo">（轉場低頻音效，靜謐感）</td>
+        <td>用正片的角色作過渡，情感延續不斷裂<span class="chip">保留記憶點</span></td>
+      </tr>
+      <tr>
+        <td><span class="sid">N12-1</span></td>
+        <td class="tc">3–9s</td>
+        <td>回切正片 08:31 的畫面：小陳床邊拍下傷口照片。接著鏡頭帶到手機螢幕，照片上出現掃描框線與分析動畫。</td>
+        <td>【未來規劃】VLM 影像理解<br>照片上傳，AI 自動辨識</td>
+        <td class="vo">「如果 App 能直接看懂這張照片——」</td>
+        <td>正片素材重用，掃描線由上往下，節奏輕快<span class="chip">回憶鉤</span></td>
+      </tr>
+      <tr>
+        <td><span class="sid">N12-2</span></td>
+        <td class="tc">9–15s</td>
+        <td>畫面特寫手機，傷口照片下方逐字打出辨識結果：「大小約 3×2 cm，滲液少量淡黃……」文字自動帶入護理紀錄欄位。</td>
+        <td>影像自動生成紀錄<br>追蹤傷口癒合進展</td>
+        <td class="vo">「不用再說，拍了就有——傷口大小、滲液、每日比對，一張照片全記錄。」</td>
+        <td>打字動畫速度略快，最後一行文字滑入紀錄欄位<span class="chip">智慧感</span></td>
+      </tr>
+      <tr>
+        <td><span class="sid">N13-1</span></td>
+        <td class="tc">15–21s</td>
+        <td>回切正片 14:00 的畫面：下一班護理師問「陳奶奶今天怎麼樣？」接著畫面切至 App「智慧交班摘要」頁，點擊「AI 產生摘要」按鈕。</td>
+        <td>【未來規劃】智慧交班摘要<br>一鍵整理，無需開口</td>
+        <td class="vo">「如果每次交班，系統能替你說——」</td>
+        <td>同樣重用正片素材問句，製造懸念<span class="chip">回憶鉤</span></td>
+      </tr>
+      <tr>
+        <td><span class="sid">N13-2</span></td>
+        <td class="tc">21–27s</td>
+        <td>交班摘要卡片依序亮起：① 異常血糖 187、WBC↑ ② Ceftriaxone 準時給藥 ③ 14:00 待辦抗生素 ④ 家屬交代事項。下一班護理師接過手機，點頭確認。</td>
+        <td>重要檢驗、給藥、待辦<br>30 秒掌握全天病況</td>
+        <td class="vo">「今天的每一筆紀錄，自動變成下一班最需要的那句話。」</td>
+        <td>卡片逐塊亮起配合 VO，待辦打勾動畫；最後接下一班護理師點頭的人物鏡頭<span class="chip">情感收尾</span></td>
+      </tr>
+      <tr>
+        <td><span class="sid">N14-1</span></td>
+        <td class="tc">27–30s</td>
+        <td>App 畫面淡出，定格產品 Logo 與標語。</td>
+        <td>智慧護理，持續進化。<br>（產品 Logo）</td>
+        <td class="vo">「智慧護理，持續進化。」</td>
+        <td>Logo 由中心放大至定位，音效收尾留白 0.5 秒再結束<span class="chip">完美句點</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="link-note" style="margin-top:0.75rem;padding:0 0.25rem">※ N12-1、N13-1 建議剪入正片的現有拍攝素材作為「回憶鉤」，讓觀眾在看預告時自然連結陳奶奶的故事，無需重新建立情境。</p>
+</div>
+
+<div class="finale">
+  <p class="fin-eye">智慧護理紀錄助手</p>
+  <p class="fin-h">智慧護理，持續進化。</p>
+  <p class="fin-s">VLM 影像理解 · 智慧交班摘要 · 即將到來</p>
+</div>
+
+</div>
